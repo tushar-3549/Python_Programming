@@ -59,7 +59,7 @@ def patch_item(item_id: int, item_update: ItemUpdate):
 '''
 
 # Day: 02
-
+'''
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
@@ -140,3 +140,100 @@ async def delete_student(id: int):
     if std.get('id') == id:
       STUDENTS.pop(i)
       return {"message": "Student deleted successfully"}
+
+'''
+
+# Day : 03
+
+from fastapi import FastAPI, HTTPException, Response
+from pydantic import BaseModel
+from typing import Optional
+
+app = FastAPI()
+
+class Student(BaseModel):
+    id: int
+    name: str
+    dept: str
+    course: Optional[str]
+
+my_students = [
+    {
+        "id": 1,
+        "name": "tushar",
+        "dept": "cse",
+        "course": "python"
+    },
+    {
+        "id": 2,
+        "name": "hemal",
+        "dept": "swe",
+        "course": "basic programming"
+    }
+]
+
+def find_post(id):
+    for p in my_students:
+        if p['id'] == id:
+            return p
+
+def find_index(id):
+    for i, str in enumerate(my_students):
+        if str['id'] == id:
+            return i
+
+@app.get("/")
+def root():
+    return {"message": "Welcome to my API"}
+
+@app.get("/students")
+def get_students():
+    return my_students
+
+@app.get('/students/{id}')
+def read_student(id: int):
+    for std in my_students:
+        if std.get('id') == id:
+            return std
+    raise HTTPException(status_code=404, detail="student not found")
+
+@app.post("/posts")
+def create_posts(post: Student):
+    post_dict = post.dict()
+    my_students.append(post_dict)
+    # print(post_dict)
+    return post_dict
+
+@app.get("/posts/latest")
+def get_latest_post():
+    post = my_students[len(my_students)-1]
+    return {"last_data": post}
+
+@app.get("/posts/{id}")
+def get_posts(id: int, response : Response):
+    # print(id)
+    # print(type(id))
+    post = find_post(int(id))
+    # print(post)
+    if not post:
+        response.status_code = 404
+    return {"post_detail": post}
+
+@app.delete("/delete/{id}")
+def delete_student(id: int):
+    for i, std in enumerate(my_students):
+        if std.get('id') == id:
+            my_students.pop(i)
+            return {"message": "student deleted successfully"}
+    
+
+@app.put("/posts/{id}")
+def update_post(id: int, post: Student):
+    ind = find_index(id)
+    post_dict = post.dict()
+    post_dict['id'] = id 
+    my_students[ind] = post_dict
+    
+    # return {"message": "student updated successfully"}
+    return {"data": post_dict}
+
