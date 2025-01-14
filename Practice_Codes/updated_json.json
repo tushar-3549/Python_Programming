@@ -1,0 +1,34 @@
+{
+    "employees": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "department": "Engineering",
+            "skills": [
+                "Python",
+                "FastAPI",
+                "PostgreSQL"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith",
+            "department": "Design",
+            "skills": [
+                "Figma",
+                "Sketch"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Alice Johnson",
+            "department": "HR",
+            "skills": [
+                "Recruitment",
+                "Communication"
+            ]
+        }
+    ],
+    "company": "TechCorp",
+    "location": "San Francisco"
+}
