@@ -1,3 +1,19 @@
+        # API  to JSON data processing 
+
+import requests
+import json
+response = requests.get("https://jsonplaceholder.typicode.com/posts")
+posts = response.json()
+# print(json.dumps(posts, indent=4))
+
+        # Count the number of posts by each user
+from collections import Counter
+cnt = Counter(post['userId'] for post in posts)
+print("Number of posts by each user: ", cnt)
+       # Extract all unique titles
+unique_titles = {post["title"] for post in posts}
+print("\nUnique Titles (Count):", len(unique_titles))
+
         # Complex Nested JSON Parsing and Manipulation
 '''
 import json
@@ -104,7 +120,7 @@ with open('updated_json.json', 'r') as f:
 print(json.dumps(data, indent=4))
 '''
               # Json Schema Validation
-              
+'''            
 from jsonschema import validate, ValidationError
 
 # JSON Schema
@@ -131,3 +147,4 @@ try:
 except ValidationError as e:
     print(f"Validation Error: {e.message}")
  
+'''
