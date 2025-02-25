@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket Demo Project</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container mt-3">
+            <h1>FastAPI WebSocket Chat</h1>
+            <h2>Your ID: <span id="ws-id"></span></h2>
+            <form onsubmit="sendMessage(event)">
+                <input type="text" class="form-control" id="messageText" autocomplete="off"/>
+                <button class="btn btn-outline-primary mt-2">Send</button>
+            </form>
+            <ul id='messages' class="mt-5"></ul>
+        </div>
+        
+        <script>
+            var clientId = Date.now();
+            document.querySelector("#ws-id").textContent = clientId;
+            var ws = new WebSocket(`ws://localhost:8000/ws/${clientId}`);
+
+            // Server theke message receive kora 
+            ws.onmessage = function(event) {
+                var msgs = document.getElementById('messages');
+                var msg = document.createElement('li');
+                msg.textContent = event.data;
+                msgs.appendChild(msg);
+            };
+
+            // Message send kora
+            function sendMessage(event) {
+                var input = document.getElementById("messageText");
+                ws.send(input.value);
+                input.value = '';
+                event.preventDefault();
+            }
+        </script>
+    </body>
+</html>
