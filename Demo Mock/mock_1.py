@@ -165,6 +165,68 @@ permute(nums)
 
 # Sort a list of tuples by 2nd value
 
+'''
 data = [(1, 5), (2, 3), (4, 1), (3, 2)]
 sorted_data = sorted(data, key = lambda x: x[1])
 print(sorted_data)
+'''
+
+# balance parenthesis 
+
+'''
+s = "[{()}]"
+stack = []
+f = 1
+for i in range(len(s)):
+    if s[i] in "({[":
+        stack.append(s[i])
+
+    elif ( s[i] == ')' and stack and stack[-1] == '(' ) or \
+          ( s[i] == '}' and stack and stack[-1] == '{') or \
+          (s[i] == ']' and stack and stack[-1] == '['):
+        stack.pop()
+    else:
+        f = 0
+        break
+
+if f == 1 and len(stack)==0:
+    print("Valid")
+else:
+    print("Invalid")
+
+'''
+
+# two sum: return value  
+
+'''
+def solve(nums, target):
+    num_map = {}
+    for i, num in enumerate(nums):
+        dif = target - num
+
+        if dif in num_map:
+            return [dif, num]
+        num_map[num] = i 
+    return []
+
+nums = [2,7,11,15]
+target = 9
+print(solve(nums, target))
+'''
+
+# two sum: return index 
+
+def solve(nums, target):
+    num_map = {}
+    for i, num in enumerate(nums):
+        dif = target - num
+        
+        if dif in num_map:
+            return [num_map[dif], i]
+        num_map[num] = i 
+        
+    return []
+
+nums = [2,7,11,15]
+target = 9
+print(solve(nums, target))
