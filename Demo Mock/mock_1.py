@@ -215,7 +215,7 @@ print(solve(nums, target))
 '''
 
 # two sum: return index 
-
+'''
 def solve(nums, target):
     num_map = {}
     for i, num in enumerate(nums):
@@ -230,3 +230,31 @@ def solve(nums, target):
 nums = [2,7,11,15]
 target = 9
 print(solve(nums, target))
+'''
+
+
+# permutations 
+
+'''
+from itertools import permutations
+arr = [1,2,3]
+res = permutations(arr)
+for i in res:
+    print(list(i))
+'''
+
+def get_permutation(arr):
+    if len(arr)==0:
+        return [[]]
+    res = []
+    for i in range(len(arr)):
+        cur = arr[i]
+        rem = arr[:i] + arr[i+1:]
+        for p in get_permutation(rem):
+            res.append([cur] + p)
+    return res
+
+arr = [1,2,3]
+res = get_permutation(arr)
+for i in res:
+    print(i)
