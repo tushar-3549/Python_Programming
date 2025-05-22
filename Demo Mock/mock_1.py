@@ -243,6 +243,7 @@ for i in res:
     print(list(i))
 '''
 
+'''
 def get_permutation(arr):
     if len(arr)==0:
         return [[]]
@@ -258,3 +259,34 @@ arr = [1,2,3]
 res = get_permutation(arr)
 for i in res:
     print(i)
+'''
+
+# Longest substring 
+
+'''
+s = "abcabcdabb"
+n = len(s)
+l = 0
+set_s = []
+ans = 0
+for r in range(n):
+    while s[r] in set_s:
+        set_s.remove(s[r])
+        l+=1
+    set_s.append(s[r])
+    ans = max(ans, r-l+1)
+print(ans)
+'''
+
+# LIS
+
+def LIS(arr):
+    n = len(arr)
+    dp = [1]*n
+    for i in range(n):
+        for j in range(i):
+            if arr[i] > arr[j]:
+                dp[i] = max(dp[i], dp[j]+1)
+    return max(dp)
+arr = [1,4,2,3,7,6]
+print(LIS(arr))
