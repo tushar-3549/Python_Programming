@@ -280,6 +280,7 @@ print(ans)
 
 # LIS
 
+'''
 def LIS(arr):
     n = len(arr)
     dp = [1]*n
@@ -288,5 +289,20 @@ def LIS(arr):
             if arr[i] > arr[j]:
                 dp[i] = max(dp[i], dp[j]+1)
     return max(dp)
+arr = [1,4,2,3,7,6]
+print(LIS(arr))
+'''
+
+# Optiize: TC: O(n logn)
+from bisect import bisect_left
+def LIS(arr):
+    temp = []
+    for num in arr:
+        pos = bisect_left(temp, num)
+        if pos == len(temp):
+            temp.append(num)
+        else:
+            temp[pos] = num
+    return len(temp)
 arr = [1,4,2,3,7,6]
 print(LIS(arr))
