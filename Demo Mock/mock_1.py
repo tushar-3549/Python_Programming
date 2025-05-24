@@ -162,7 +162,28 @@ def permute(nums, path=[]):
 nums = [1, 2, 3]
 permute(nums)
 '''
+# permutations backtrack
+'''
+def permute(nums):
+    ans = []
+    sol = []
+    n = len(nums)
 
+    def backtrack():
+        if len(sol) == n:
+            ans.append(sol[:])
+            return
+        for x in nums:
+            if x not in sol:
+                sol.append(x)
+                backtrack()
+                sol.pop()
+    backtrack()
+    return ans
+
+nums = [1,2,3]
+print(permute(nums))
+'''
 # Sort a list of tuples by 2nd value
 
 '''
@@ -171,138 +192,14 @@ sorted_data = sorted(data, key = lambda x: x[1])
 print(sorted_data)
 '''
 
-# balance parenthesis 
+# Group Anagram 
+from collections import defaultdict
+def groupAnagram(strs):
+    anagram = defaultdict(list)
+    for w in strs:
+        key = ''.join(sorted(w))
+        anagram[key].append(w)
+    return list(anagram.values())
 
-'''
-s = "[{()}]"
-stack = []
-f = 1
-for i in range(len(s)):
-    if s[i] in "({[":
-        stack.append(s[i])
-
-    elif ( s[i] == ')' and stack and stack[-1] == '(' ) or \
-          ( s[i] == '}' and stack and stack[-1] == '{') or \
-          (s[i] == ']' and stack and stack[-1] == '['):
-        stack.pop()
-    else:
-        f = 0
-        break
-
-if f == 1 and len(stack)==0:
-    print("Valid")
-else:
-    print("Invalid")
-
-'''
-
-# two sum: return value  
-
-'''
-def solve(nums, target):
-    num_map = {}
-    for i, num in enumerate(nums):
-        dif = target - num
-
-        if dif in num_map:
-            return [dif, num]
-        num_map[num] = i 
-    return []
-
-nums = [2,7,11,15]
-target = 9
-print(solve(nums, target))
-'''
-
-# two sum: return index 
-'''
-def solve(nums, target):
-    num_map = {}
-    for i, num in enumerate(nums):
-        dif = target - num
-        
-        if dif in num_map:
-            return [num_map[dif], i]
-        num_map[num] = i 
-        
-    return []
-
-nums = [2,7,11,15]
-target = 9
-print(solve(nums, target))
-'''
-
-
-# permutations 
-
-'''
-from itertools import permutations
-arr = [1,2,3]
-res = permutations(arr)
-for i in res:
-    print(list(i))
-'''
-
-'''
-def get_permutation(arr):
-    if len(arr)==0:
-        return [[]]
-    res = []
-    for i in range(len(arr)):
-        cur = arr[i]
-        rem = arr[:i] + arr[i+1:]
-        for p in get_permutation(rem):
-            res.append([cur] + p)
-    return res
-
-arr = [1,2,3]
-res = get_permutation(arr)
-for i in res:
-    print(i)
-'''
-
-# Longest substring 
-
-'''
-s = "abcabcdabb"
-n = len(s)
-l = 0
-set_s = []
-ans = 0
-for r in range(n):
-    while s[r] in set_s:
-        set_s.remove(s[r])
-        l+=1
-    set_s.append(s[r])
-    ans = max(ans, r-l+1)
-print(ans)
-'''
-
-# LIS
-
-'''
-def LIS(arr):
-    n = len(arr)
-    dp = [1]*n
-    for i in range(n):
-        for j in range(i):
-            if arr[i] > arr[j]:
-                dp[i] = max(dp[i], dp[j]+1)
-    return max(dp)
-arr = [1,4,2,3,7,6]
-print(LIS(arr))
-'''
-
-# Optiize: TC: O(n logn)
-from bisect import bisect_left
-def LIS(arr):
-    temp = []
-    for num in arr:
-        pos = bisect_left(temp, num)
-        if pos == len(temp):
-            temp.append(num)
-        else:
-            temp[pos] = num
-    return len(temp)
-arr = [1,4,2,3,7,6]
-print(LIS(arr))
+strs = ["eat","tea","tan","ate","nat","bat"]
+print(groupAnagram(strs))
