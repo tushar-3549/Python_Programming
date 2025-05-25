@@ -193,6 +193,7 @@ print(sorted_data)
 '''
 
 # Group Anagram 
+'''
 from collections import defaultdict
 def groupAnagram(strs):
     anagram = defaultdict(list)
@@ -203,3 +204,29 @@ def groupAnagram(strs):
 
 strs = ["eat","tea","tan","ate","nat","bat"]
 print(groupAnagram(strs))
+'''
+
+# Check Prime number
+'''
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+
+num = 7
+print(is_prime(num))
+'''
+
+# Sum Of Digits
+
+def sumOfDigit(n):
+    ans = 0
+    while n != 0:
+        ans += n % 10
+        n = n // 10
+    return ans 
+n = 12
+print(sumOfDigit(n))
