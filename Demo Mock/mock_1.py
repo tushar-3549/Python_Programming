@@ -234,6 +234,7 @@ print(sumOfDigit(n))
 
 # String to int 
 
+'''
 def myAtoi(s):
     """
     :type s: str
@@ -265,4 +266,15 @@ def myAtoi(s):
 
     return num
 print(myAtoi("32"))
-        
+'''
+
+# swap 2 numbers without temp variable
+
+a=1
+b=2
+
+a=a+b
+b=a-b
+a=a-b
+print("a: ",a )
+print("b: ",b )
