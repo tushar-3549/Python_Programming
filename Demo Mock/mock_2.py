@@ -20,7 +20,7 @@ print(count_subsequences(s, words))
 '''
 
 # Implement stack using queue
-
+'''
 from collections import deque
 
 class StackUsingQueue:
@@ -52,3 +52,30 @@ stack.push(3)
 print(stack.top())  
 print(stack.pop()) 
 print(stack.empty()) 
+'''
+
+# Combination
+
+def combine(n, k):
+    ans, sol = [], []
+    def backtrack(x):
+        if len(sol) == k:
+            ans.append(sol[:])
+            return
+        left = x
+        need = k - len(sol)
+        if left > need:
+            backtrack(x-1)
+        sol.append(x)
+        backtrack(x-1)
+        sol.pop()
+    
+    backtrack(n)
+    return ans
+
+
+n = 4
+k = 2
+answer = combine(n, k)
+for i in answer:
+    print(i)
