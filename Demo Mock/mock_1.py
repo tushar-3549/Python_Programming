@@ -269,7 +269,7 @@ print(myAtoi("32"))
 '''
 
 # swap 2 numbers without temp variable
-
+'''
 a=1
 b=2
 
@@ -278,3 +278,14 @@ b=a-b
 a=a-b
 print("a: ",a )
 print("b: ",b )
+'''
+
+# Missing value in an array
+
+arr = [1,2,3,5]
+n = len(arr)
+sum = (n+1) * (n + 2) // 2
+total = 0
+for i in range(0, n):
+    total += arr[i]
+print(sum-total)
