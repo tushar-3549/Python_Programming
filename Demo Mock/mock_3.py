@@ -42,3 +42,39 @@ res = list(permutations(nums))
 for i in res:
     print(list(i))
 '''
+
+# Write a function which converts decimal number to hexadecimal
+'''
+def decimal_to_hexa(decimal):
+    if decimal == 0:
+        return "0"
+    hexa_digits = "0123456789ABCDEF"
+    hexadecimal = ""
+    
+    while decimal > 0:
+        rem = decimal % 16 
+        hexadecimal =  hexa_digits[rem] + hexadecimal
+        decimal = decimal // 16 
+    return hexadecimal
+
+decimal = 11
+print(decimal_to_hexa(decimal))
+'''
+
+# Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.
+'''
+class Solution(object):
+    def addDigits(self, num):
+        """
+        :type num: int
+        :rtype: int
+        """
+        while num > 9:
+            res = 0 
+
+            while num > 0:
+                res += num % 10
+                num = num // 10
+            num = res
+        return num
+'''
